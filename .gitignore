@@ -8,5 +8,3 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
-rust/target/
-rust/Cargo.lock

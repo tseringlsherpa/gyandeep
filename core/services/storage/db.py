@@ -1,4 +1,4 @@
-"""Robust asynchronous database wrapper for Gyandeep."""
+"""Robust asynchronous database wrapper for DeepGyan."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ try:
 except ImportError:
     HAS_ASYNCPG = False
 
-logger = logging.getLogger("gyandeep.storage.db")
+logger = logging.getLogger("deepgyan.storage.db")
 
 class AsyncDatabase:
     """Asynchronous database wrapper using asyncpg with auto-creation support."""

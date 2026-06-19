@@ -1,4 +1,4 @@
-"""Minimal SQL storage service for Gyandeep.
+"""Minimal SQL storage service for DeepGyan.
 
 Focuses on:
 - Text chunks + embeddings (pgvector)
@@ -16,7 +16,7 @@ from uuid import UUID
 
 from core.services.storage.db import AsyncDatabase, HAS_ASYNCPG
 
-logger = logging.getLogger("gyandeep.storage")
+logger = logging.getLogger("deepgyan.storage")
 
 
 @dataclass
@@ -35,7 +35,7 @@ class DbConfig:
 
 
 class SQLStorageService:
-    """Minimal async storage service for Gyandeep."""
+    """Minimal async storage service for DeepGyan."""
 
     def __init__(
         self,
@@ -43,7 +43,7 @@ class SQLStorageService:
         port: int = 5432,
         user: str = "postgres",
         password: str = "",
-        db_name: str = "gyandeep",
+        db_name: str = "deepgyan",
         pool_min: int = 2,
         pool_max: int = 10,
         schema_path: Optional[str] = None,

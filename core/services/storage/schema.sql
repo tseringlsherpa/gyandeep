@@ -1,4 +1,4 @@
--- Gyandeep minimal database schema
+-- DeepGyan minimal database schema
 -- Focused on personalized learning + pgvector embeddings
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

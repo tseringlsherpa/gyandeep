@@ -1,4 +1,4 @@
-"""Dashboard configuration for Gyandeep."""
+"""Dashboard configuration for DeepGyan."""
 from __future__ import annotations
 
 import os

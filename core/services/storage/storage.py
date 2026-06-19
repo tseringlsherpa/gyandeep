@@ -1,4 +1,4 @@
-"""Storage service abstractions for Gyandeep."""
+"""Storage service abstractions for DeepGyan."""
 from __future__ import annotations
 
 from abc import ABC, abstractmethod

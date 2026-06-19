@@ -1,4 +1,4 @@
-"""Utilities for Gyandeep database management."""
+"""Utilities for DeepGyan database management."""
 from __future__ import annotations
 
 import asyncio
@@ -14,14 +14,14 @@ except ImportError:
 from core.services.storage.env_storage import EnvStorageService, STORAGE_AVAILABLE
 
 
-async def setup_gyandeep_db(
+async def setup_deepgyan_db(
     host: str = "localhost",
     port: int = 5432,
     user: str = "postgres",
     password: str = "",
-    db_name: str = "gyandeep",
+    db_name: str = "deepgyan",
 ) -> bool:
-    """Initialize the Gyandeep database and tables."""
+    """Initialize the DeepGyan database and tables."""
     if not STORAGE_AVAILABLE:
         print("Error: storage dependencies not available. Cannot setup database.")
         return False
@@ -36,7 +36,7 @@ async def setup_gyandeep_db(
 
     try:
         await storage.initialize()
-        print(f"Successfully initialized Gyandeep database: {db_name}")
+        print(f"Successfully initialized DeepGyan database: {db_name}")
         await storage.close()
         return True
     except Exception as exc:
@@ -49,9 +49,9 @@ async def check_database_status(
     port: int = 5432,
     user: str = "postgres",
     password: str = "",
-    db_name: str = "gyandeep",
+    db_name: str = "deepgyan",
 ) -> None:
-    """Print status and counts for Gyandeep database tables."""
+    """Print status and counts for DeepGyan database tables."""
     if not STORAGE_AVAILABLE:
         print("Error: Storage dependencies not available.")
         return
@@ -72,7 +72,7 @@ async def check_database_status(
             return
 
         tables = ["students", "learning_events", "text_chunks"]
-        print(f"\n--- Gyandeep Database Table Counts ({db_name}) ---")
+        print(f"\n--- DeepGyan Database Table Counts ({db_name}) ---")
         for table in tables:
             try:
                 res = await db.fetch_one(f"SELECT COUNT(*) as count FROM {table}")
@@ -91,7 +91,7 @@ async def test_pg_vector_support(
     port: int = 5432,
     user: str = "postgres",
     password: str = "",
-    db_name: str = "gyandeep",
+    db_name: str = "deepgyan",
 ) -> bool:
     """Test if pgvector extension is available and working."""
     if not HAS_ASYNCPG:
@@ -124,11 +124,11 @@ if __name__ == "__main__":
     port = int(os.environ.get("DB_PORT", 5432))
     user = os.environ.get("DB_USER", "postgres")
     password = os.environ.get("DB_PASSWORD", "")
-    db_name = os.environ.get("DB_NAME", "gyandeep")
+    db_name = os.environ.get("DB_NAME", "deepgyan")
 
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "check":
         asyncio.run(check_database_status(host, port, user, password, db_name))
     else:
         print(f"Setting up database at {host}:{port}...")
-        asyncio.run(setup_gyandeep_db(host, port, user, password, db_name))
+        asyncio.run(setup_deepgyan_db(host, port, user, password, db_name))

@@ -1,1 +1,1 @@
-"""Backend package for the Gyandeep dashboard."""
+"""Backend package for the DeepGyan dashboard."""

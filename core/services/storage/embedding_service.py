@@ -1,17 +1,10 @@
-"""Lightweight embedding storage helpers for Gyandeep."""
+"""Lightweight embedding storage helpers for DeepGyan."""
 from __future__ import annotations
 
 import os
 import asyncio
 from dataclasses import dataclass
-from typing import Iterable, List, Sequence
-
-try:
-    from gyandeep_rs import vectors_to_pg_literals as _rs_vec_literals
-    from gyandeep_rs import truncate_texts as _rs_truncate
-    _HAS_RUST = True
-except ImportError:
-    _HAS_RUST = False
+from typing import Sequence
 
 
 def _load_dotenv_if_available() -> None:
@@ -35,7 +28,7 @@ class EmbeddingConfig:
     db_port: int = 5432
     db_user: str = "postgres"
     db_password: str = "postgres"
-    db_name: str = "gyandeep"
+    db_name: str = "deepgyan"
 
     @classmethod
     def from_env(cls) -> "EmbeddingConfig":
@@ -52,7 +45,7 @@ class EmbeddingConfig:
             db_port=int(os.getenv("DB_PORT", "5432")),
             db_user=os.getenv("DB_USER", "postgres"),
             db_password=os.getenv("DB_PASSWORD", "postgres"),
-            db_name=os.getenv("DB_NAME", "gyandeep"),
+            db_name=os.getenv("DB_NAME", "deepgyan"),
         )
 
 
@@ -71,10 +64,7 @@ class EmbeddingService:
         single_input = isinstance(texts, str)
         texts = [texts] if single_input else list(texts)
 
-        if _HAS_RUST:
-            texts = _rs_truncate(texts, self.config.max_chars)
-        else:
-            texts = [self._truncate_text(t) for t in texts]
+        texts = [self._truncate_text(t) for t in texts]
 
         if self.config.embedding_provider == "openai":
             all_embeddings = await self._get_openai_embeddings(texts)
@@ -214,7 +204,7 @@ def index_embeddings(
     db_port = int(os.getenv("DB_PORT", "5432"))
     db_user = os.getenv("DB_USER", "postgres")
     db_password = os.getenv("DB_PASSWORD", "")
-    db_name = os.getenv("DB_NAME", "gyandeep")
+    db_name = os.getenv("DB_NAME", "deepgyan")
 
     conn = psycopg2.connect(
         host=db_host,
@@ -242,13 +232,10 @@ def index_embeddings(
             if ensure_schema:
                 cur.execute(create_schema_sql)
 
-            if _HAS_RUST:
-                pg_literals = _rs_vec_literals([list(embeddings[i]) for i in range(len(chunks))])
-            else:
-                pg_literals = [
-                    "[" + ",".join(f"{v:.6f}" for v in embeddings[i]) + "]"
-                    for i in range(len(chunks))
-                ]
+            pg_literals = [
+                "[" + ",".join(f"{v:.6f}" for v in embeddings[i]) + "]"
+                for i in range(len(chunks))
+            ]
 
             records = [
                 (source, idx, chunk, pg_literals[idx])

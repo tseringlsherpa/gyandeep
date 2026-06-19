@@ -1,1 +1,1 @@
-"""Agent orchestration modules for GyanDeep."""
+"""Agent orchestration modules for DeepGyan."""

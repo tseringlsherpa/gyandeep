@@ -145,7 +145,7 @@ def _db_connect():
     db_password = os.getenv("DB_PASSWORD")
     if not db_password:
         db_password = "postgres"
-    db_name = os.getenv("DB_NAME", "gyandeep")
+    db_name = os.getenv("DB_NAME", "deepgyan")
 
     return psycopg2.connect(
         host=db_host,

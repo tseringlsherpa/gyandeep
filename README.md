@@ -1,6 +1,6 @@
-# GyanDeep
+# DeepGyan
 
-GyanDeep is an AI learning platform for Nepali high‑school students. It lets students upload a textbook PDF, view pages on the left, and ask questions on the right. OCR and embeddings are precomputed so the assistant can answer using either the current page window or whole‑book retrieval.
+DeepGyan is an AI learning platform for Nepali high‑school students. It lets students upload a textbook PDF, view pages on the left, and ask questions on the right. OCR and embeddings are precomputed so the assistant can answer using either the current page window or whole‑book retrieval.
 
 **Core features**
 - PDF viewer with page controls and upload flow
@@ -19,7 +19,6 @@ GyanDeep is an AI learning platform for Nepali high‑school students. It lets s
   - macOS: `brew install tesseract`
   - Arch Linux: `sudo pacman -S tesseract tesseract-data-eng`
   - Ubuntu/Debian: `sudo apt-get install tesseract-ocr tesseract-data-eng`
-- Rust Toolchain *(to compile the high-performance Rust extension during install)*
 
 ## Quick Start
 1. Create and activate a virtual environment.
@@ -27,21 +26,16 @@ GyanDeep is an AI learning platform for Nepali high‑school students. It lets s
    ```bash
    pip install -r requirements.txt
    ```
-3. Build the lightning-fast Rust extension in release mode:
-   ```bash
-   pip install maturin
-   maturin develop --release -m rust/Cargo.toml
-   ```
-4. Create `.env` from the example and add your API key:
+3. Create `.env` from the example and add your API key:
    ```bash
    cp .env.example .env
    # Edit .env and set SARVAMAI_KEY=...
    ```
-5. Start services (DB + app):
+4. Start services (DB + app):
    ```bash
    ./start_services.sh
    ```
-6. Open the app at [http://localhost:8000](http://localhost:8000).
+5. Open the app at [http://localhost:8000](http://localhost:8000).
 
 ## How It Works
 - **Upload** a PDF from the dashboard.

@@ -11,7 +11,7 @@ if [[ -f "${ROOT_DIR}/.env" ]]; then
   set +a
 fi
 
-DB_NAME="${DB_NAME:-gyandeep}"
+DB_NAME="${DB_NAME:-deepgyan}"
 DB_USER="${DB_USER:-postgres}"
 DB_PASSWORD="${DB_PASSWORD:-postgres}"
 DB_PORT="${DB_PORT:-5432}"

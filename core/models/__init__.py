@@ -1,4 +1,4 @@
-"""Pydantic models for GyanDeep domain entities."""
+"""Pydantic models for DeepGyan domain entities."""
 
 from core.models.plugins import PluginJobRequest, PluginJobResult
 from core.models.storage import Book, LearningEvent, OCRPage, Student, TextChunk

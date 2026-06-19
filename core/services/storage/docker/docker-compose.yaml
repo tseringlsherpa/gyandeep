@@ -2,7 +2,7 @@ services:
   db:
     image: ankane/pgvector:v0.5.1
     environment:
-      POSTGRES_DB: ${DB_NAME:-gyandeep}
+      POSTGRES_DB: ${DB_NAME:-deepgyan}
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     volumes:
@@ -10,7 +10,7 @@ services:
     ports:
       - "${DB_PORT:-5432}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-gyandeep}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-deepgyan}"]
       interval: 5s
       timeout: 5s
       retries: 5
